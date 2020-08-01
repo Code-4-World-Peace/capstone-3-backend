@@ -13,14 +13,23 @@ public class Product {
 	
 	@Column(unique = true, nullable = false)
 	private String sku;
+	@Column(unique = true, nullable = false)
 	private String name;
+	@Column(nullable = false)
 	private String description;
+	@Column(nullable = false)
 	private String heat;
+	@Column(nullable = false)
 	private String flavor;
+	@Column(nullable = false)
 	private double price;
+	@Column(nullable = false)
 	private String image;
+	@Column(nullable = false)
 	private String tag;
+	@Column(nullable = false)
 	private int stock;
+	@Column(nullable = false)
 	private String stripePrice;
 	
 	public Product(String sku, String name, String description, String heat, String flavor,
