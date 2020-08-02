@@ -13,6 +13,7 @@ import com.code4worldpeace.capstone3.Shared.Dto.ProductDto;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(path = "products")
 public class ProductController {
 
