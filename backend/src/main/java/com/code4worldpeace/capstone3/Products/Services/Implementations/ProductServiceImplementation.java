@@ -51,4 +51,58 @@ public class ProductServiceImplementation implements ProductService {
 		
 	}
 	
+	@Override
+	public List<ProductDto> getProducts() {
+		
+		
+		List<Product> productList = (List<Product>) productRepository.findAll();
+		
+		List<ProductDto> productDtoList = new ArrayList<ProductDto>();
+		
+		for(Product product : productList) {
+			
+			ProductDto productDto = new ProductDto();
+			BeanUtils.copyProperties(product, productDto);
+			
+			productDtoList.add(productDto);
+		}
+		
+		return productDtoList;
+	}
+
+	@Override
+	public ProductDto updateProductByName(String name, ProductDto requestedUpdate) {
+		
+		Product updateProduct = new Product();
+		BeanUtils.copyProperties(requestedUpdate, updateProduct);
+		
+		Product oldProductData = productRepository.findByName(name);
+		
+		ProductDto returnValue = new ProductDto();
+		
+		// If requested name is already in use, error out and dont allow the update
+		if(productRepository.findByName(requestedUpdate.getName()) != null && !requestedUpdate.getName().equals(name))
+			throw new ProductAlreadyExistsException("Unable to perform update. Product already exists with that name.");
+			
+		if(requestedUpdate.getStock() < 0)
+			throw new IllegalArgumentException("Invalid quantity: " + requestedUpdate.getStock());
+		
+		if(oldProductData == null) {
+			
+			//throw new UserNotFoundException("Product Not Found");
+			throw new ProductAlreadyExistsException("Unable to perform update. Product with name: " + name + " not found.");
+		}
+		else {
+			
+			updateProduct.setId(oldProductData.getId());
+			updateProduct.setSku(oldProductData.getSku());
+			
+			Product updatedProductDetails = productRepository.save(updateProduct);
+			
+			
+			BeanUtils.copyProperties(updatedProductDetails, returnValue);
+			
+			return returnValue;
+		}
+	}
 }

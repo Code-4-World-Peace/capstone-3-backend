@@ -8,4 +8,8 @@ public interface ProductService {
 
 	ProductDto createProduct(ProductDto productDto);
 
+	List<ProductDto> getProducts();
+
+	ProductDto updateProductByName(String name, ProductDto requestedUpdate);
+
 }

@@ -43,4 +43,35 @@ public class ProductController {
 		
 		return returnValue;
 	}
+	
+	@GetMapping
+	public List<ProductResponse> getProducts() {
+		
+		List<ProductDto> productDtoList = productService.getProducts();
+		
+		List<ProductResponse> productResponseList = new ArrayList<ProductResponse>();
+		
+		for(ProductDto productDto : productDtoList) {
+			ProductResponse productResponse = new ProductResponse();
+			BeanUtils.copyProperties(productDto, productResponse);
+			
+			productResponseList.add(productResponse);
+		}
+		
+		return productResponseList;
+	}
+	
+	@PutMapping(path = "{name}")
+	public ProductResponse updateProduct(@PathVariable String name, @RequestBody ProductRequest productRequestDetails) {
+		
+		ProductDto requestedUpdate = new ProductDto();
+		BeanUtils.copyProperties(productRequestDetails, requestedUpdate);
+		
+		ProductDto updatedProduct = productService.updateProductByName(name, requestedUpdate);
+		
+		ProductResponse returnValue = new ProductResponse();
+		BeanUtils.copyProperties(updatedProduct, returnValue);
+		
+		return returnValue;
+	}
 }
