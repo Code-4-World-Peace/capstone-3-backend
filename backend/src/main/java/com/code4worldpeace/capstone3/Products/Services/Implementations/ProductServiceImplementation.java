@@ -84,7 +84,7 @@ public class ProductServiceImplementation implements ProductService {
 		if(productRepository.findByName(requestedUpdate.getName()) != null && !requestedUpdate.getName().equals(name))
 			throw new ProductAlreadyExistsException("Unable to perform update. Product already exists with that name.");
 			
-		if(requestedUpdate.getStock() < 0)
+		if(requestedUpdate.getStock() <= 0)
 			throw new IllegalArgumentException("Invalid quantity: " + requestedUpdate.getStock());
 		
 		if(oldProductData == null) {
