@@ -19,7 +19,7 @@ public class ProductServiceImplementation implements ProductService {
     private final ProductRepository productRepository;
     private final SkuGenerator skuGenerator;
 
-    public ProductServiceImplementation(ProductRepository productRepository, SkuGenerator skuGenerator) {
+    ProductServiceImplementation(ProductRepository productRepository, SkuGenerator skuGenerator) {
         this.productRepository = productRepository;
         this.skuGenerator = skuGenerator;
     }
