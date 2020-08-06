@@ -14,12 +14,28 @@ public class ProductServiceImplementationTests {
         ProductDto productDto = new ProductDto();
         ProductRepository repository = Mockito.mock(ProductRepository.class);
         SkuGenerator skuGenerator = new SkuGenerator();
-        boolean expected = true;
-        boolean actual = false;
+        String expected = "Name cannot be null or empty";
+        String actual = "Failed to throw exception";
         try {
             new ProductServiceImplementation(repository, skuGenerator).createProduct(productDto);
         } catch (NullPointerException e) {
-            actual = e.getMessage().equals("Name cannot be null");
+            actual = e.getMessage();
+        }
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testCreateProduct_emptyStringName() {
+        ProductDto productDto = new ProductDto();
+        productDto.setName("");
+        ProductRepository repository = Mockito.mock(ProductRepository.class);
+        SkuGenerator skuGenerator = new SkuGenerator();
+        String expected = "Name cannot be null or empty";
+        String actual = "Failed to throw exception";
+        try {
+            new ProductServiceImplementation(repository, skuGenerator).createProduct(productDto);
+        } catch (NullPointerException e) {
+            actual = e.getMessage();
         }
         Assertions.assertEquals(expected, actual);
     }

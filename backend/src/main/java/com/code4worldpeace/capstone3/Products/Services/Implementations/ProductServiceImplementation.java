@@ -29,8 +29,9 @@ public class ProductServiceImplementation implements ProductService {
         if (productRepository.findByName(productDto.getName()) != null) {
             throw new ProductAlreadyExistsException("Product is already in inventory");
         }
-        if (productDto.getName() == null) {
-            throw new NullPointerException("Name cannot be null");
+        String name = productDto.getName();
+        if (name == null || name.isBlank()) {
+            throw new NullPointerException("Name cannot be null or empty");
         }
         Product product = new Product();
         BeanUtils.copyProperties(productDto, product);
