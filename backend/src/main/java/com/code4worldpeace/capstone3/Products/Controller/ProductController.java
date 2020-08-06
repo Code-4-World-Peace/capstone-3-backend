@@ -32,7 +32,6 @@ public class ProductController {
 			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
 	)	
 	public ProductResponse createProduct(@RequestBody ProductRequest productRequest) {
-		
 		ProductDto productDto = new ProductDto();
 		BeanUtils.copyProperties(productRequest, productDto);
 		
