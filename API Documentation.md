@@ -5,6 +5,7 @@ This API uses `GET`, `POST`, & `PUT` methods to communicate. This API returns HT
 ## Response Codes
 
 ```
+200: OK
 409: Conflict
 500: Internal Server Error
 ```
