@@ -155,3 +155,5 @@ Met to practice-demo the capstone presentation.
 12:30pm Presented Capstone
 
 2:30pm Team Retrospective Meeting
+
+Big thanks to Nancy for keeping up with this for us!!
